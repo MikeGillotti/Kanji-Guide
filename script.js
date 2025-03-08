@@ -73,6 +73,7 @@ pageContent += `
                 </div>`;
 
         // Check if strokes exist and is an array
+        if (Array.isArray(row.strokes)) {
             row.strokes.forEach((stroke, strokeIndex) => {
                 const startCoords = stroke.replace(/\s/g, "").split(" ")[0];
                 const startCoordsValues = startCoords.slice(1).split(",");
@@ -95,7 +96,47 @@ pageContent += `
                         </svg>
                     </div>`;
             });
-       
+        } else {
+
+
+
+                const startCoords = strokes.replace(/\s/g, "").split(" ")[0];
+                const startCoordsValues = startCoords.slice(1).split(",");
+                const startX = startCoordsValues[0];
+                const startY = startCoordsValues[1].toLowerCase().split("c")[0];
+
+                pageContent += `
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 109">
+                            <!-- Render all previous strokes as grayed out -->
+                            
+                            
+                            <!-- Render the current stroke in black -->
+                            <path d="${strokes}" class="active" />
+                            
+                            <!-- Place the start marker at the top of the cell -->
+                            <circle cx="${startX}" cy="${startY}" r="5" fill="red" class="start-marker" />
+                        </svg>
+                    </div>`;
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 
         pageContent += `</div>`; // Closing container div
 
