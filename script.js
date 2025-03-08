@@ -85,11 +85,11 @@ pageContent += `
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 109">
                             <!-- Render all previous strokes as grayed out -->
                             ${row.strokes.slice(0, strokeIndex).map(prevStroke => `
-                                <path d="${prevStroke[1]}" class="gray" />
+                                <path d="${prevStroke}" class="gray" />
                             `).join('')}
                             
                             <!-- Render the current stroke in black -->
-                            <path d="${stroke[1]}" class="active" />
+                            <path d="${stroke}" class="active" />
                             
                             <!-- Place the start marker at the top of the cell -->
                             <circle cx="${startX}" cy="${startY}" r="5" fill="red" class="start-marker" />
