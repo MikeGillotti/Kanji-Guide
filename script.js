@@ -78,7 +78,7 @@ pageContent += `
                 const startCoords = stroke[0].replace(" ", "").split(" ")[0];
                 const startCoordsValues = startCoords.slice(1).split(",");
                 const startX = startCoordsValues[0];
-                const startY = startCoordsValues[1].toLowerCase().split("c")[0];
+                const startY = startCoordsValues[1]?.toLowerCase().split("c")[0];
 
                 pageContent += `
                     <div>
