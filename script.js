@@ -107,17 +107,19 @@ pageContent += `
     });
 
 
-    // Function to handle lesson selection
-    function loadLesson() {
-        const selectedLesson = document.getElementById("lesson-select").value;
-        document.getElementById("kanji-container").innerHTML = generateKanjiPage(selectedLesson);
-    }
+    // Get the dropdown element
+const lessonDropdown = document.getElementById("lesson-select");
 
-    // Populate initial lesson
-    loadLesson();
+// Extract unique lesson values
+const uniqueLessons = [...new Set(filteredKanji.map(item => item.lesson))];
 
-    // Add event listener for lesson selection
-    document.getElementById("lesson-select").addEventListener("change", loadLesson);
+// Populate the dropdown
+uniqueLessons.forEach(lesson => {
+    const option = document.createElement("option");
+    option.value = lesson;
+    option.textContent = `Lesson ${lesson}`;
+    lessonDropdown.appendChild(option);
+});
 
 
 
