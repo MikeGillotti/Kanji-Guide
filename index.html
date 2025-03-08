@@ -121,6 +121,7 @@
       }
       #lessonLinks > a {
         display: inline;
+        text-decoration: none;
       }
       .strokes {
         border-style: solid;
@@ -163,10 +164,16 @@
       function createLessonLinks() {
         for (let i = 1; i <= 50; i++) {
           const link = document.createElement("a");
+          const span = document.createElement("span");
           link.href = `?lesson=${i}`;
-          link.textContent = `${i}|`;
+          link.textContent = `${i}`;
+          span.textContent = "·";
           link.classList.add("lesson-link");
+          span.classList.add("lesson-link");
           lessonLinksContainer.appendChild(link);
+          if (i < 50) {
+            lessonLinksContainer.appendChild(span);
+          }
         }
       }
 
