@@ -26,10 +26,18 @@ function renderKanjiPage() {
     const lesson = getQueryParam("lesson");
     console.log("Filtering by lesson:", lesson); // Log the lesson parameter
 
-    // Make sure lesson is compared as a string (if it's a string in your JSON)
-    const filteredKanji = kanjiData.filter(kanji => String(kanji.lesson) === lesson); 
+    if (!lesson) {
+        console.log("No lesson parameter found in URL");
+        return;
+    }
 
-    // Log the filtered data to see what's being matched
+    // Log the kanjiData structure and the lesson field for debugging
+    console.log("Kanji data:", kanjiData);
+    
+    // Ensure `lesson` is treated as a string for filtering
+    const filteredKanji = kanjiData.filter(kanji => String(kanji.lesson) === lesson);
+
+    // Log the filtered kanji
     console.log("Filtered Kanji:", filteredKanji);
 
     if (filteredKanji.length === 0) {
