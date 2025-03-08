@@ -51,7 +51,7 @@ function renderKanjiPage() {
         pageContent += `
             <div class="container">
                 <div class="kanji-info">
-                    <div class="kanji">${row.kanji}</div>
+                    <div class="kanji">${row.kanji ? ` ${row.kanji} `:"" }</div>
                     ${row.meaning ? `
                         <div class="readings">${row.readings}</div>
                         <div class="meaning">${row.meaning}</div>
