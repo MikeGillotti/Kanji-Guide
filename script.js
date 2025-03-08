@@ -75,10 +75,10 @@ pageContent += `
         // Check if strokes exist and is an array
         if (Array.isArray(row.strokes)) {
             row.strokes.forEach((stroke, strokeIndex) => {
-                const startCoords = stroke[0].replace(" ", "").split(" ")[0];
+                const startCoords = stroke.replace(/\s/g, "").split(" ")[0];
                 const startCoordsValues = startCoords.slice(1).split(",");
                 const startX = startCoordsValues[0];
-                const startY = startCoordsValues[1]?.toLowerCase().split("c")[0];
+                const startY = startCoordsValues[1].toLowerCase().split("c")[0];
 
                 pageContent += `
                     <div>
