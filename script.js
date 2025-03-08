@@ -108,7 +108,7 @@ pageContent += `
 
 
 // Reference to the dropdown element
-const lessonDropdown = document.getElementById("lessonDropdown");
+const lessonDropdown = document.getElementById("lesson-select");
 
 // Step 1: Populate the dropdown with lessons 1 through 50
 function populateDropdown() {
