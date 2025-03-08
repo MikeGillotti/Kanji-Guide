@@ -110,17 +110,19 @@ pageContent += `
     // Get the dropdown element
 const lessonDropdown = document.getElementById("lesson-select");
 
-// Extract unique lesson values
+// Extract all unique lesson values from the entire filteredKanji data
 const uniqueLessons = [...new Set(filteredKanji.map(item => item.lesson))];
 
-// Populate the dropdown
+// Clear the dropdown first to ensure no old options are there
+lessonDropdown.innerHTML = '<option value="" disabled selected>Select a lesson</option>';
+
+// Populate the dropdown with all unique lessons
 uniqueLessons.forEach(lesson => {
     const option = document.createElement("option");
     option.value = lesson;
     option.textContent = `Lesson ${lesson}`;
     lessonDropdown.appendChild(option);
 });
-
 
 
     // Inject the page content into the container
