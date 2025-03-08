@@ -89,7 +89,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         loadLessonFromURL();
     }
 
- 
+    // Event listener for lesson selection
+    document.getElementById("lesson-select").addEventListener("change", function () {
+        updateURL(this.value);
+    });
 
     // Load data initially
     await loadKanjiData();
