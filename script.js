@@ -107,40 +107,26 @@ pageContent += `
     });
 
 
-// Reference to the dropdown element
-const lessonDropdown = document.getElementById("lesson-select");
+// Reference to the container where links will be displayed
+const lessonLinksContainer = document.getElementById("lessonLinks");
 
-// Step 1: Populate the dropdown with lessons 1 through 50
-function populateDropdown() {
+// Step 1: Create an array of lesson links 1 through 50
+function createLessonLinks() {
     for (let i = 1; i <= 50; i++) {
-        const option = document.createElement("option");
-        option.value = i;
-        option.textContent = `Lesson ${i}`;
-        lessonDropdown.appendChild(option);
+        const link = document.createElement("a");
+        link.href = `?lesson=${i}`;
+        link.textContent = `Lesson ${i}`;
+        link.classList.add("lesson-link"); // Optional: Adding a class for styling
+        link.style.display = "block"; // Makes each link appear on a new line
+        lessonLinksContainer.appendChild(link);
     }
 }
 
-// Step 2: Add event listener to redirect when a lesson is selected
-lessonDropdown.addEventListener("change", (event) => {
-    const selectedLesson = event.target.value;
-    if (selectedLesson) {
-        // Redirect to the new URL with the selected lesson
-        window.location.href = `?lesson=${selectedLesson}`;
-    }
-});
-
-// Step 3: Populate the dropdown on page load
+// Step 2: Generate the lesson links on page load
 document.addEventListener("DOMContentLoaded", () => {
-    populateDropdown();
-
-    // Optionally: If there's a 'lesson' query parameter in the URL, you can select it in the dropdown
-    const urlParams = new URLSearchParams(window.location.search);
-    const selectedLesson = urlParams.get('lesson');
-    
-    if (selectedLesson) {
-        lessonDropdown.value = selectedLesson;  // This will select the lesson in the dropdown
-    }
+    createLessonLinks();
 });
+
 
     // Inject the page content into the container
     document.getElementById("kanji-container").innerHTML = pageContent;
