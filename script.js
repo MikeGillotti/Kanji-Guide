@@ -73,7 +73,6 @@ pageContent += `
                 </div>`;
 
         // Check if strokes exist and is an array
-        if (Array.isArray(row.strokes)) {
             row.strokes.forEach((stroke, strokeIndex) => {
                 const startCoords = stroke.replace(/\s/g, "").split(" ")[0];
                 const startCoordsValues = startCoords.slice(1).split(",");
@@ -96,10 +95,7 @@ pageContent += `
                         </svg>
                     </div>`;
             });
-        } else {
-            // If there are no strokes or it's not an array, add a warning message
-            pageContent += `<p>No strokes available for this kanji.</p>`;
-        }
+       
 
         pageContent += `</div>`; // Closing container div
 
