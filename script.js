@@ -1,28 +1,47 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const sampleData = {
-        word: "例",
-        kana: "れい",
-        meaning: "example",
-        queriedKanji: [
-            {
-                kanji: "例",
-                readings: "れい",
-                meaning: "example",
-                radical: "⺅",
-                strokes: [
-                    "M20 20C40 40 60 60 80 80",
-                    "M30 30C50 50 70 70 90 90"
-                ]
-            }
-        ]
-    };
+document.addEventListener("DOMContentLoaded", async function () {
+    let kanjiData = [];
 
-    function generateKanjiPage(word, kana, meaning, queriedKanji) {
+    // Function to get URL parameters
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Load JSON data from a file
+    async function loadKanjiData() {
+        try {
+            const response = await fetch("kanji_data.json"); // Update with the actual path
+            kanjiData = await response.json();
+            populateLessonsDropdown();
+            loadLessonFromURL(); // Load lesson from the URL when the page loads
+        } catch (error) {
+            console.error("Error loading JSON data:", error);
+        }
+    }
+
+    // Populate the lesson dropdown
+    function populateLessonsDropdown() {
+        const lessonSelect = document.getElementById("lesson-select");
+        const lessons = [...new Set(kanjiData.map(entry => entry.lesson))]; // Extract unique lesson values
+
+        lessonSelect.innerHTML = lessons.map(lesson => `<option value="${lesson}">${lesson}</option>`).join('');
+
+        // Set the dropdown to the lesson from the URL (if available)
+        const lessonFromURL = getQueryParam("lesson");
+        if (lessonFromURL && lessons.includes(lessonFromURL)) {
+            lessonSelect.value = lessonFromURL;
+        }
+    }
+
+    // Generate kanji page for the selected lesson
+    function generateKanjiPage(lesson) {
+        const queriedKanji = kanjiData.filter(entry => entry.lesson === lesson);
+
         return `
         <div class="page">
-            <h1>${word} - ${kana} - ${meaning}</h1>
-            
-            ${queriedKanji.map(row => `
+            <h1>Lesson: ${lesson}</h1>
+
+            ${queriedKanji.length > 0 ? queriedKanji.map(row => `
                 <div class="container">
                     <div class="kanji-info">
                         <div class="kanji">${row.kanji}</div>
@@ -36,15 +55,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${row.strokes.map((stroke, strokeIndex) => `
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 109">
-                                <!-- Render previous strokes as gray -->
                                 ${row.strokes.slice(0, strokeIndex).map(prevStroke => `
                                     <path d="${prevStroke}" class="gray" />
                                 `).join('')}
 
-                                <!-- Render current stroke in black -->
                                 <path d="${stroke}" class="active" />
 
-                                <!-- Extract starting point of the stroke -->
                                 ${(() => {
                                     const coords = stroke.replace(/\s/g, "").split(" ")[0].slice(1).split(",");
                                     const startX = coords[0];
@@ -55,16 +71,29 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     `).join('')}
                 </div>
-            `).join('')}
+            `).join('') : `<p>No kanji found for this lesson.</p>`}
         </div>
         `;
     }
 
-    // Insert generated HTML into the page
-    document.getElementById("kanji-container").innerHTML = generateKanjiPage(
-        sampleData.word,
-        sampleData.kana,
-        sampleData.meaning,
-        sampleData.queriedKanji
-    );
+    // Load lesson based on URL or dropdown selection
+    function loadLessonFromURL() {
+        const selectedLesson = getQueryParam("lesson") || document.getElementById("lesson-select").value;
+        document.getElementById("kanji-container").innerHTML = generateKanjiPage(selectedLesson);
+    }
+
+    // Update the URL when the user selects a lesson from the dropdown
+    function updateURL(lesson) {
+        const newUrl = `${window.location.pathname}?lesson=${lesson}`;
+        window.history.pushState({ path: newUrl }, "", newUrl);
+        loadLessonFromURL();
+    }
+
+    // Event listener for lesson selection
+    document.getElementById("lesson-select").addEventListener("change", function () {
+        updateURL(this.value);
+    });
+
+    // Load data initially
+    await loadKanjiData();
 });
