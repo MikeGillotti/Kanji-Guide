@@ -107,37 +107,33 @@ pageContent += `
     });
 
 
-// Assuming 'kanjiData' is your full dataset
+// Reference to the dropdown element
 const lessonDropdown = document.getElementById("lessonDropdown");
 
-// Step 1: Extract unique lessons from your dataset
-const uniqueLessons = [...new Set(kanjiData.map(item => item.lesson))];
-
-// Step 2: Populate the dropdown with all unique lessons
+// Step 1: Populate the dropdown with lessons 1 through 50
 function populateDropdown() {
-    lessonDropdown.innerHTML = '<option value="" disabled selected>Select a lesson</option>';
-    uniqueLessons.forEach(lesson => {
+    for (let i = 1; i <= 50; i++) {
         const option = document.createElement("option");
-        option.value = lesson;
-        option.textContent = `Lesson ${lesson}`;
+        option.value = i;
+        option.textContent = `Lesson ${i}`;
         lessonDropdown.appendChild(option);
-    });
+    }
 }
 
-// Step 3: Redirect to a new page when a lesson is selected
+// Step 2: Add event listener to redirect when a lesson is selected
 lessonDropdown.addEventListener("change", (event) => {
     const selectedLesson = event.target.value;
     if (selectedLesson) {
-        // Navigate to the new URL with the selected lesson as a query parameter
+        // Redirect to the new URL with the selected lesson
         window.location.href = `?lesson=${selectedLesson}`;
     }
 });
 
-// Step 4: On page load, populate the dropdown with lessons
+// Step 3: Populate the dropdown on page load
 document.addEventListener("DOMContentLoaded", () => {
     populateDropdown();
 
-    // Optionally: if there's a 'lesson' query parameter in the URL, you can select it in the dropdown
+    // Optionally: If there's a 'lesson' query parameter in the URL, you can select it in the dropdown
     const urlParams = new URLSearchParams(window.location.search);
     const selectedLesson = urlParams.get('lesson');
     
@@ -145,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
         lessonDropdown.value = selectedLesson;  // This will select the lesson in the dropdown
     }
 });
-
 
     // Inject the page content into the container
     document.getElementById("kanji-container").innerHTML = pageContent;
