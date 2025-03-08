@@ -113,24 +113,7 @@ pageContent += `
     document.getElementById("kanji-container").innerHTML = pageContent;
 
 
-    const lessonLinksContainer = document.getElementById("lessonLinks");
 
-// Step 1: Create an array of lesson links 1 through 50
-function createLessonLinks() {
-    for (let i = 1; i <= 50; i++) {
-        const link = document.createElement("a");
-        link.href = `?lesson=${i}`;
-        link.textContent = `Lesson ${i}`;
-        link.classList.add("lesson-link"); // Optional: Adding a class for styling
-        link.style.display = "block"; // Makes each link appear on a new line
-        lessonLinksContainer.appendChild(link);
-    }
-}
-
-
-    document.addEventListener("DOMContentLoaded", () => {
-        createLessonLinks();
-    });
 }
 
 // Load the kanji data and render the page
