@@ -126,9 +126,6 @@
       #lessonLinks > a {
         display: inline;
       }
-      #lessonLinks > p {
-        display: inline;
-      }
     </style>
   </head>
   <body>
@@ -146,12 +143,9 @@
       function createLessonLinks() {
         for (let i = 1; i <= 50; i++) {
           const link = document.createElement("a");
-          const text = document.createElement("p");
-          text.textContent = "|";
           link.href = `?lesson=${i}`;
-          link.textContent = `${i}`;
+          link.textContent = `${i}|`;
           link.classList.add("lesson-link");
-          text.classList.add("lesson-link");
           lessonLinksContainer.appendChild(link);
         }
       }
