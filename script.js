@@ -50,10 +50,13 @@ function renderKanjiPage() {
     filteredKanji.forEach(item => {
 
 pageContent += `
+            <div class="container">
 
 <h1>${item.word} - ${item.kana} - ${item.meaning} </h1>
-`;
+</div>
 
+
+`;
 
         item.kanji_details.forEach(row => {
 
