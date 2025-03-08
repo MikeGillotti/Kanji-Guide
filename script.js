@@ -108,7 +108,7 @@ pageContent += `
 
 
  // Assuming 'kanjiData' is the full dataset
-const lessonDropdown = document.getElementById("lesson-select");
+const lessonDropdown = document.getElementById("lessonDropdown");
 
 // Step 1: Extract unique lessons from your dataset
 const uniqueLessons = [...new Set(kanjiData.map(item => item.lesson))];
