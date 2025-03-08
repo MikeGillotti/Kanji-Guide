@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                                 <path d="${stroke}" class="active" />
 
                                 ${(() => {
-                                    const coords = stroke.replace(/\s/g, "").split(" ")[0].slice(1).split(",");
+                                    const coords = stroke.replace(/\s/g, "").trim().split(" ")[0].slice(1).split(",");
                                     const startX = coords[0];
-                                    const startY = coords[1].split("c")[0];
+                                    const startY = coords[1].toLowerCase().split("c")[0];
                                     return `<circle cx="${startX}" cy="${startY}" r="5" fill="red" class="start-marker" />`;
                                 })()}
                             </svg>
