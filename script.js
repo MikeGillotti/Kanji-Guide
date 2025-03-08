@@ -81,7 +81,7 @@ pageContent += `
                 const startY = startCoordsValues[1].toLowerCase().split("c")[0];
 
                 pageContent += `
-                    <div>
+                    <div class="strokes">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 109">
                             <!-- Render all previous strokes as grayed out -->
                             ${row.strokes.slice(0, strokeIndex).map(prevStroke => `
@@ -106,7 +106,7 @@ pageContent += `
                 const startY = startCoordsValues[1].toLowerCase().split("c")[0];
 
                 pageContent += `
-                    <div>
+                    <div class="strokes">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 109">
                             <!-- Render all previous strokes as grayed out -->
                             
