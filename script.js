@@ -51,15 +51,15 @@ function renderKanjiPage() {
 
 pageContent += `
             <div class="container">
-            <div>
+            <div class="word-heading">
 
-<h1>${item.word} /h1>
+<h1>${item.word} </h1>
 </div>
- <div>
+ <div class="word-heading">
 
 <h1>${item.kana} </h1>
 </div>
- <div>
+ <div class="word-heading">
 
 <h1>${item.meaning} </h1>
 </div>
