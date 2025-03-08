@@ -107,6 +107,20 @@ pageContent += `
     });
 
 
+    // Function to handle lesson selection
+    function loadLesson() {
+        const selectedLesson = document.getElementById("lesson-select").value;
+        document.getElementById("kanji-container").innerHTML = generateKanjiPage(selectedLesson);
+    }
+
+    // Populate initial lesson
+    loadLesson();
+
+    // Add event listener for lesson selection
+    document.getElementById("lesson-select").addEventListener("change", loadLesson);
+
+
+
     // Inject the page content into the container
     document.getElementById("kanji-container").innerHTML = pageContent;
 }
