@@ -47,9 +47,22 @@ function renderKanjiPage() {
 
     let pageContent = "";
 
-    filteredKanji.kanji_details.forEach(row => {
+    filteredKanji.forEach(item => {
+
+pageContent += `
+
+<h1>${item.word} - ${item.kana} - ${item.meaning} </h1>
+`;
+
+
+        item.kanji_details.forEach(row => {
+
+
+
         pageContent += `
             <div class="container">
+
+            
                 <div class="kanji-info">
                     <div class="kanji">${row.kanji}</div>
                     ${row.meaning ? `
@@ -89,7 +102,10 @@ function renderKanjiPage() {
         }
 
         pageContent += `</div>`; // Closing container div
+
     });
+    });
+
 
     // Inject the page content into the container
     document.getElementById("kanji-container").innerHTML = pageContent;
