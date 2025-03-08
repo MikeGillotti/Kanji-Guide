@@ -100,7 +100,7 @@ pageContent += `
 
 
 
-                const startCoords = strokes.replace(/\s/g, "").split(" ")[0];
+                const startCoords = row.strokes.replace(/\s/g, "").split(" ")[0];
                 const startCoordsValues = startCoords.slice(1).split(",");
                 const startX = startCoordsValues[0];
                 const startY = startCoordsValues[1].toLowerCase().split("c")[0];
@@ -112,7 +112,7 @@ pageContent += `
                             
                             
                             <!-- Render the current stroke in black -->
-                            <path d="${strokes}" class="active" />
+                            <path d="${row.strokes}" class="active" />
                             
                             <!-- Place the start marker at the top of the cell -->
                             <circle cx="${startX}" cy="${startY}" r="5" fill="red" class="start-marker" />
