@@ -107,44 +107,44 @@ pageContent += `
     });
 
 
- // Reference to the dropdown element
- const lessonDropdown = document.getElementById("lessonDropdown");
+// Assuming 'kanjiData' is your full dataset
+const lessonDropdown = document.getElementById("lessonDropdown");
 
- // Step 1: Extract unique lessons from the dataset
- const uniqueLessons = [...new Set(kanjiData.map(item => item.lesson))];
+// Step 1: Extract unique lessons from your dataset
+const uniqueLessons = [...new Set(kanjiData.map(item => item.lesson))];
 
- // Step 2: Populate the dropdown with all unique lessons
- function populateDropdown() {
-     lessonDropdown.innerHTML = '<option value="" disabled selected>Select a lesson</option>';
-     uniqueLessons.forEach(lesson => {
-         const option = document.createElement("option");
-         option.value = lesson;
-         option.textContent = `Lesson ${lesson}`;
-         lessonDropdown.appendChild(option);
-     });
- }
+// Step 2: Populate the dropdown with all unique lessons
+function populateDropdown() {
+    lessonDropdown.innerHTML = '<option value="" disabled selected>Select a lesson</option>';
+    uniqueLessons.forEach(lesson => {
+        const option = document.createElement("option");
+        option.value = lesson;
+        option.textContent = `Lesson ${lesson}`;
+        lessonDropdown.appendChild(option);
+    });
+}
 
- // Step 3: Redirect to a new page when a lesson is selected
- lessonDropdown.addEventListener("change", (event) => {
-     const selectedLesson = event.target.value;
-     if (selectedLesson) {
-         // Navigate to the new URL with the selected lesson as a query parameter
-         window.location.href = `?lesson=${selectedLesson}`;
-     }
- });
+// Step 3: Redirect to a new page when a lesson is selected
+lessonDropdown.addEventListener("change", (event) => {
+    const selectedLesson = event.target.value;
+    if (selectedLesson) {
+        // Navigate to the new URL with the selected lesson as a query parameter
+        window.location.href = `?lesson=${selectedLesson}`;
+    }
+});
 
- // Step 4: On page load, populate the dropdown with lessons
- document.addEventListener("DOMContentLoaded", () => {
-     populateDropdown();
+// Step 4: On page load, populate the dropdown with lessons
+document.addEventListener("DOMContentLoaded", () => {
+    populateDropdown();
 
-     // Optionally: if there's a 'lesson' query parameter in the URL, you can select it in the dropdown
-     const urlParams = new URLSearchParams(window.location.search);
-     const selectedLesson = urlParams.get('lesson');
-     
-     if (selectedLesson) {
-         lessonDropdown.value = selectedLesson;  // This will select the lesson in the dropdown
-     }
- });
+    // Optionally: if there's a 'lesson' query parameter in the URL, you can select it in the dropdown
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedLesson = urlParams.get('lesson');
+    
+    if (selectedLesson) {
+        lessonDropdown.value = selectedLesson;  // This will select the lesson in the dropdown
+    }
+});
 
 
     // Inject the page content into the container
