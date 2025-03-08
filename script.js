@@ -10,8 +10,8 @@ async function loadKanjiData() {
         console.log("Kanji data loaded:", kanjiData); // Debugging
         renderKanjiPage();
     } catch (error) {
-        console.error("Error loading JSON data:", error);
-        document.getElementById("kanji-container").innerHTML = "<p>Error loading data.</p>";
+        //console.error("Error loading JSON data:", error);
+        //document.getElementById("kanji-container").innerHTML = "<p>Error loading data.</p>";
     }
 }
 
@@ -46,11 +46,24 @@ function renderKanjiPage() {
     }
 
     let pageContent = "";
-
+    let sideContent="";
     filteredKanji.forEach(item => {
 
+        sideContent +=`
+        
+        
+        <a
+            class="list-group-item list-group-item-action py-3 lh-tight"
+            href="#${item.word}"
+            >${item.word}-${item.kana}(${item.meaning})</a
+          >
+
+        
+        
+        `;
+
 pageContent += `
-            <div class="container">
+            <div id="${item.word}" class="container">
             <div class="word-heading">
 
 <h1>${item.word} </h1>
@@ -140,15 +153,6 @@ pageContent += `
 
 
 
-
-
-
-
-
-
-
-
-
         }
 
         pageContent += `</div>`; // Closing container div
@@ -161,6 +165,9 @@ pageContent += `
 
     // Inject the page content into the container
     document.getElementById("kanji-container").innerHTML = pageContent;
+    document.getElementById("side-panel").innerHTML = sideContent;
+    document.getElementById("side-heading").innerHTML = "Lesson "+lesson;
+
 
 
 
