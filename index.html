@@ -24,6 +24,105 @@
         border: 1px solid #ddd;
         margin-top: 10px;
       }
+      h1 {
+        font-family: "Meiryo";
+        font-weight: normal;
+      }
+
+      table {
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      table {
+        margin: auto;
+      }
+      .kanji-info {
+        width: 100%;
+        display: flex;
+      }
+      .kanji-info > div {
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: gray;
+        flex: 1;
+        padding: 5px;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .container > div {
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: gray;
+      }
+
+      .page {
+        width: 80%; /* Full width of the page */
+        overflow: clip;
+        margin-left: auto;
+        margin-right: auto;
+        break-after: auto;
+        padding-top: 10px;
+      }
+
+      .kanji {
+        font-size: 25px;
+        font-family: "Meiryo";
+      }
+      .readings {
+        font-size: 20px;
+        font-family: "Meiryo";
+      }
+      .meaning {
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .radical {
+        text-align: right;
+        font-family: "Meiryo";
+      }
+
+      .worksheet {
+        width: 50px;
+        height: 50px;
+      }
+
+      th {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+      }
+
+      td {
+        width: 50px;
+        height: 50px;
+        vertical-align: top;
+        text-align: center;
+        font-size: 25px;
+      }
+      svg {
+        width: 50px;
+        height: 50px;
+      }
+
+      .gray {
+        stroke: gray;
+        fill: none;
+        stroke-width: 2;
+      }
+      .active {
+        stroke: black;
+        fill: none;
+        stroke-width: 2;
+      }
     </style>
   </head>
   <body>
