@@ -1,3 +1,26 @@
+// Assuming you have a JSON file 'kanji_data.json' with the kanji data
+let kanjiData = [];
+
+// Function to load kanji data from the JSON file
+async function loadKanjiData() {
+    try {
+        const response = await fetch("kanji_data.json");
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        kanjiData = await response.json();
+        console.log("Kanji data loaded:", kanjiData); // Debugging
+        renderKanjiPage();
+    } catch (error) {
+        console.error("Error loading JSON data:", error);
+        document.getElementById("kanji-container").innerHTML = "<p>Error loading data.</p>";
+    }
+}
+
+// Function to get URL parameter by name
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
 // Function to render kanji data based on the selected lesson
 function renderKanjiPage() {
     const lesson = getQueryParam("lesson");
@@ -25,24 +48,14 @@ function renderKanjiPage() {
     let pageContent = "";
 
     filteredKanji.forEach(row => {
-        console.log("Processing row:", row); // Log the current row to inspect its structure
-
-        // Check for undefined properties
-        const word = row.word || "No word available";
-        const kana = row.kana || "No kana available";
-        const meaning = row.meaning || "No meaning available";
-        const readings = row.readings || "No readings available";
-        const radical = row.radical || "No radical available";
-
         pageContent += `
             <div class="container">
                 <div class="kanji-info">
-                    <div class="kanji">${word}</div>
-                    <div class="kana">${kana}</div>
-                    ${meaning !== "No meaning available" ? `
-                        <div class="readings">${readings}</div>
-                        <div class="meaning">${meaning}</div>
-                        <div class="radical">${radical}</div>
+                    <div class="kanji">${row.kanji}</div>
+                    ${row.meaning ? `
+                        <div class="readings">${row.readings}</div>
+                        <div class="meaning">${row.meaning}</div>
+                        <div class="radical">${row.radical}</div>
                     ` : ""}
                 </div>`;
 
@@ -81,3 +94,6 @@ function renderKanjiPage() {
     // Inject the page content into the container
     document.getElementById("kanji-container").innerHTML = pageContent;
 }
+
+// Load the kanji data and render the page
+loadKanjiData();
